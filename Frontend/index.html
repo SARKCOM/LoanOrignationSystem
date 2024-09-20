@@ -1,1 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Wheeler Loan Application</title>
+    <style>
+        /* Styling for passport-size photo preview */
+        #photoPreview, #kycPreview {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Apply for a Two-Wheeler Loan</h1>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+        
+        <!-- Date of Application -->
+        <label for="application_date">Date of Application:</label><br>
+        <input type="date" id="application_date" name="application_date" required><br><br>
+        
+        <!-- Customer Name -->
+        <label for="name">Name of Customer:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <!-- Mobile Number -->
+        <label for="mobile">Mobile No:</label><br>
+        <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10}" placeholder="Enter 10 digit mobile number"><br><br>
+        
+        <!-- Address -->
+        <label for="address">Address:</label><br>
+        <textarea id="address" name="address" required placeholder="Enter full address"></textarea><br><br>
+        
+        <!-- Village/Town -->
+        <label for="village_town">Village/Town:</label><br>
+        <input type="text" id="village_town" name="village_town" required><br><br>
+        
+        <!-- Residence Type -->
+        <label for="residence_type">Residence Type:</label><br>
+        <select id="residence_type" name="residence_type" required>
+            <option value="Permanent">Permanent</option>
+            <option value="Temporary">Temporary</option>
+        </select><br><br>
+        
+        <!-- Monthly Income -->
+        <label for="income">Monthly Income (INR):</label><br>
+        <input type="number" id="income" name="income" required placeholder="Enter monthly income"><br><br>
+        
+        <!-- Customer Photo Upload -->
+        <label for="customer_photo">Upload Customer Photo:</label><br>
+        <input type="file" id="customer_photo" name="customer_photo" accept="image/*" capture="user" required><br><br>
+        <img id="photoPreview" alt="Customer Photo Preview"><br><br>
+        
+        <!-- KYC Upload -->
+        <label for="kyc">Upload KYC Document:</label><br>
+        <input type="file" id="kyc" name="kyc" accept="image/*,.pdf" required><br><br>
+        <img id="kycPreview" alt="KYC Document Preview"><br><br>
+        
+        <!-- Any Other Document Upload -->
+        <label for="other_document">Upload Any Other Document:</label><br>
+        <input type="file" id="other_document" name="other_document" accept="image/*,.pdf"><br><br>
+        
+        <!-- Vehicle Model (Dropdown) -->
+        <label for="vehicle_model">Vehicle Model:</label><br>
+        <select id="vehicle_model" name="vehicle_model" required>
+            <option value="Hero">Hero</option>
+            <option value="Honda">Honda</option>
+            <option value="Suzuki">Suzuki</option>
+            <option value="Royal Enfield">Royal Enfield</option>
+            <option value="Bajaj">Bajaj</option>
+            <option value="TVS">TVS</option>
+            <option value="Yamaha">Yamaha</option>
+            <option value="Others">Others</option>
+        </select><br><br>
+        
+        <!-- Finance Amount -->
+        <label for="finance_amount">Finance Amount (INR):</label><br>
+        <input type="number" id="finance_amount" name="finance_amount" required placeholder="Enter loan amount"><br><br>
+        
+        <!-- EMI -->
+        <label for="emi">EMI (INR):</label><br>
+        <input type="number" id="emi" name="emi" required placeholder="Enter EMI amount"><br><br>
+        
+        <!-- Tenure -->
+        <label for="tenure">Tenure (in months):</label><br>
+        <input type="number" id="tenure" name="tenure" required placeholder="Enter tenure in months"><br><br>
+        
+        <!-- Agent (Dropdown) -->
+        <label for="agent">Agent:</label><br>
+        <select id="agent" name="agent" required>
+            <option value="Dharmendra">Dharmendra</option>
+            <option value="Krishna">Krishna</option>
+            <option value="Ghanshyam">Ghanshyam</option>
+            <option value="Sumit">Sumit</option>
+            <option value="Rupendra">Rupendra</option>
+            <option value="Chandrashekhar">Chandrashekhar</option>
+            <option value="Siddharth">Siddharth</option>
+            <option value="Direct">Direct</option>
+        </select><br><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- JavaScript to preview the uploaded customer photo and KYC document -->
+    <script>
+        // Preview Customer Photo
+        document.getElementById('customer_photo').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoPreview = document.getElementById('photoPreview');
+                    photoPreview.src = e.target.result;
+                    photoPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Preview KYC Document
+        document.getElementById('kyc').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const kycPreview = document.getElementById('kycPreview');
+                    kycPreview.src = e.target.result;
+                    kycPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
 
